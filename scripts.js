@@ -59,6 +59,32 @@ closeButton.addEventListener("click", () => {
     dialog.close();
 });
 
+function addBookToTable(title, author, pages, status) {
+    const newRow = document.createElement("tr")
+    bookTable.appendChild(newRow)
+
+    const addTitle = document.createElement("td")
+    addTitle.textContent = title
+    addTitle.classList.add("book-title")
+
+    const addAuthor = document.createElement("td")
+    addAuthor.textContent = author
+    addAuthor.classList.add("book-author")
+
+    const addPages = document.createElement("td")
+    addPages.textContent = pages
+    addPages.classList.add("book-pages")
+
+    const addStatus = document.createElement("td")
+    addStatus.textContent = status
+    addStatus.classList.add("book-status")
+
+    newRow.appendChild(addTitle)
+    newRow.appendChild(addAuthor)
+    newRow.appendChild(addPages)
+    newRow.appendChild(addStatus)
+}
+
 addBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(e.target)
@@ -68,7 +94,8 @@ addBookForm.addEventListener("submit", (e) => {
     const status = formData.get("status")
 
     addBookToLibrary(title, author, pages, status)
+    addBookToTable(title, author, pages, status)
     dialog.close();
 })
 
-// Need to figure out how to display newly added books to the list with the for loop. Because currently they only add the the array but do not display.
+// Find a way to remove duplicated code for adding new table data.
