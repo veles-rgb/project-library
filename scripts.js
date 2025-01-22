@@ -47,4 +47,6 @@ myLibrary.forEach((book) => {
     newRow.appendChild(status)
 })
 
-console.log(bookTable)
+function showForm() {
+
+}

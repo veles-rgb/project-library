@@ -10,8 +10,8 @@ body {
 }
 
 .container {
-    width: 70%;
-    height: 70%;
+    width: 80%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,14 +29,15 @@ body {
 }
 
 .book-container h1 {
-    padding: 0.7rem;
+    padding: 0.7rem 0.7rem 0px 0.7rem;
     color: rgb(119, 0, 255);
     font-weight: 1000;
     font-size: 3rem;
+    border-bottom: 2px solid rgb(119, 0, 255);
 }
 
 .book-list {
-    border: 1px solid rgb(119, 0, 255);
+    border: 2px solid rgb(119, 0, 255);
 }
 
 table {
@@ -48,9 +49,26 @@ table {
 table th {
     padding: 1rem;
     box-shadow: 0px 0px 4px 3px rgb(119, 0, 255);
+    font-size: 1.5rem;
 }
 
 table td {
-    border: 1px solid rgb(119, 0, 255);
+    border: 2px solid rgb(119, 0, 255);
     padding: 1rem;
+}
+
+.add-book-btn {
+    width: 10rem;
+    height: 4rem;
+    margin: 25px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: rgb(119, 0, 255);
+    background-color: white;
+    border: 2px solid rgb(119, 0, 255);
+}
+
+.add-book-btn:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 4px 1px rgb(119, 0, 255);
 }
