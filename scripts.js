@@ -1,4 +1,7 @@
 const bookTable = document.getElementById("books-table")
+const addBookBtn = document.querySelector(".add-book-btn")
+const dialog = document.querySelector("dialog")
+const closeButton = document.querySelector("dialog button");
 
 // Array of Books
 const myLibrary = [
@@ -47,6 +50,11 @@ myLibrary.forEach((book) => {
     newRow.appendChild(status)
 })
 
-function showForm() {
+addBookBtn.addEventListener("click", () => {
+    dialog.showModal()
+})
 
-}
+// "Close" button closes the dialog
+closeButton.addEventListener("click", () => {
+    dialog.close();
+});

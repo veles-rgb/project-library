@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./styles.css">
     <script src="./scripts.js" defer></script>
 </head>
+
 <body>
     <div class="container">
         <div class="book-container">
@@ -24,6 +26,40 @@
                 </table>
             </div>
         </div>
+        <dialog>
+            <h1>Add A Book</h1>
+            <form id="form">
+                <div class="form-item">
+                    <label for="title">Title</label>
+                    <input type="text" name="title" id="title">
+                </div>
+
+                <div class="form-item">
+                    <label for="author">Author</label>
+                    <input type="text" name="author" id="author">
+                </div>
+
+                <div class="form-item">
+                    <label for="pages">Pages</label>
+                    <input type="number" name="pages" id="pages">
+                </div>
+
+                <div class="form-item">
+                    <label for="status">Read Status</label>
+                    <select name="status" id="status">
+                        <option value="false">Not Read</option>
+                        <option value="true">Read</option>
+                    </select>
+                </div>
+
+                <div class="form-item">
+                    <input class="submit-btn" type="submit" value="Submit">
+                </div>
+
+            </form>
+            <button class="close-btn">Close</button>
+        </dialog>
     </div>
 </body>
+
 </html>
