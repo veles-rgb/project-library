@@ -2,6 +2,7 @@ const bookTable = document.getElementById("books-table")
 const addBookBtn = document.querySelector(".add-book-btn")
 const dialog = document.querySelector("dialog")
 const closeButton = document.querySelector("dialog button");
+const addBookForm = document.querySelector("#form")
 
 // Array of Books
 const myLibrary = [
@@ -54,7 +55,20 @@ addBookBtn.addEventListener("click", () => {
     dialog.showModal()
 })
 
-// "Close" button closes the dialog
 closeButton.addEventListener("click", () => {
     dialog.close();
 });
+
+addBookForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target)
+    const title = formData.get("title") 
+    const author = formData.get("author")
+    const pages = formData.get("pages")
+    const status = formData.get("status")
+
+    addBookToLibrary(title, author, pages, status)
+    dialog.close();
+})
+
+// Need to figure out how to display newly added books to the list with the for loop. Because currently they only add the the array but do not display.
