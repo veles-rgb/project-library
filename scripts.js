@@ -13,13 +13,24 @@ const myLibrary = [
     new Book("The Da Vinci Code", "Dan Brown", 689, false),
 ];
 
-// constructor
+// Constructor
 function Book(title, author, pages, status) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.status = status;
 };
+
+// Change the read status of a book
+Book.prototype.changeStatus = function(index) {
+    if (myLibrary[index].status === true) {
+        myLibrary[index].status = false
+    } else {
+        myLibrary[index].status = true
+    }
+    // Update table display after status change
+    updateTable();
+}
 
 // Add books to library
 function addBookToLibrary(title, author, pages, status) {
@@ -50,9 +61,13 @@ function displayBook(book, index) {
     newRow.appendChild(pages);
 
     const status = document.createElement("td");
-    status.textContent = book.status ? "Read" : "Not Read";
-    status.classList.add("book-status");
     newRow.appendChild(status);
+    const statusBtn = document.createElement("button");
+    statusBtn.textContent = book.status ? "Read" : "Not Read";
+    statusBtn.classList.add("status-btn");
+    // Event listener for status button
+    statusBtn.addEventListener("click", () => book.changeStatus(index));
+    status.appendChild(statusBtn);
 
     const delBtnCell = document.createElement("td");
     newRow.appendChild(delBtnCell);

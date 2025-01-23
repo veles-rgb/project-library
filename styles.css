@@ -153,13 +153,41 @@ select {
 }
 
 .del-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    height: 3rem;
+    width: 8rem;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: red;
+    background-color: white;
+    border: 2px solid red;
+    padding: 10px;
+}
+
+.del-btn:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 4px 1px red;
+}
+
+.status-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    height: 3rem;
+    width: 8rem;
+    font-size: 1.2rem;
+    font-weight: 900;
     color: rgb(119, 0, 255);
     background-color: white;
     border: 2px solid rgb(119, 0, 255);
     padding: 10px;
 }
 
-.del-btn:hover {
+.status-btn:hover {
     cursor: pointer;
     box-shadow: 0px 0px 4px 1px rgb(119, 0, 255);
 }
