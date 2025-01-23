@@ -11,7 +11,7 @@ body {
 
 .container {
     width: 80%;
-    height: 80%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,6 +19,8 @@ body {
 }
 
 .book-container {
+    overflow :hidden;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     align-items: center;
