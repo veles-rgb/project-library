@@ -1,4 +1,5 @@
 const bookTable = document.getElementById("books-table");
+const bookTableBody = document.querySelector("#books-table tbody");
 const addBookBtn = document.querySelector(".add-book-btn");
 const dialog = document.querySelector("dialog");
 const closeButton = document.querySelector("dialog button");
@@ -27,9 +28,11 @@ function addBookToLibrary(title, author, pages, status) {
 };
 
 // Add book to display table
-function displayBook(book) {
+function displayBook(book, index) {
     const newRow = document.createElement("tr");
-    bookTable.appendChild(newRow);
+    // Connect row with index
+    newRow.setAttribute("data-index", index);
+    bookTableBody.appendChild(newRow);
 
     const title = document.createElement("td");
     title.textContent = book.title;
@@ -47,51 +50,51 @@ function displayBook(book) {
     newRow.appendChild(pages);
 
     const status = document.createElement("td");
-    status.textContent = book.status;
+    status.textContent = book.status ? "Read" : "Not Read";
     status.classList.add("book-status");
     newRow.appendChild(status);
 
-    const delBtnCell = document.createElement("td")
-    newRow.appendChild(delBtnCell)
-    const delBtn = document.createElement("button")
-    delBtn.textContent = "Delete Book"
-    delBtn.parentElement = newRow
-    delBtn.classList.add("del-btn")
-    delBtnCell.appendChild(delBtn)
+    const delBtnCell = document.createElement("td");
+    newRow.appendChild(delBtnCell);
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "Delete Book";
+    delBtn.classList.add("del-btn");
+    delBtn.addEventListener("click", () => deleteBook(index));
+    delBtnCell.appendChild(delBtn);
+}
 
-    // Add eventlistener to new button
-    delBtnEventListener(delBtn)
+// Delete book from array and update display
+function deleteBook(index) {
+    myLibrary.splice(index, 1);
+    updateTable();
 }
 
 // Display books already in array
-myLibrary.forEach(displayBook);
+function updateTable() {
+    bookTableBody.innerHTML = "";
+    myLibrary.forEach((book, index) => displayBook(book, index));
+}
+
+updateTable();
 
 // Capture form data and add to library and display
 addBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target)
-    const title = formData.get("title") 
-    const author = formData.get("author")
-    const pages = formData.get("pages")
-    const status = formData.get("status")
+    const formData = new FormData(e.target);
+    const title = formData.get("title");
+    const author = formData.get("author");
+    const pages = formData.get("pages");
+    const status = formData.get("status") === "true";
 
-    // Create new book from form Data
+    // Create new book from form data
     const newBook = new Book(title, author, pages, status);
 
-    // Add new book to library and display on table
-    addBookToLibrary(title, author, pages, status)
-    displayBook(newBook);
-    
+    // Add new book to library and update display
+    addBookToLibrary(title, author, pages, status);
+    updateTable();
+
     dialog.close();
 });
-
-// Create event listener on button
-function delBtnEventListener(btn) {
-    btn.addEventListener("click", (e) => {
-        const btn = e.target;
-        btn.parentElement.parentElement.remove()
-    });
-}
 
 addBookBtn.addEventListener("click", () => {
     dialog.showModal()
