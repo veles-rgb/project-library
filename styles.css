@@ -19,7 +19,7 @@ body {
 }
 
 .book-container {
-    overflow :hidden;
+    overflow: hidden;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;
@@ -87,7 +87,7 @@ dialog {
 
 dialog h1 {
     text-align: center;
-    
+
 }
 
 .close-btn {
@@ -155,19 +155,25 @@ select {
     box-shadow: 0px 0px 4px 1px rgb(119, 0, 255);
 }
 
-.del-btn {
+.del-btn,
+.status-btn {
+    margin: auto;
+    display: block;
     display: flex;
     justify-content: center;
     align-items: center;
     justify-self: center;
     height: 3rem;
-    width: 8rem;
+    width: 10rem;
     font-size: 1.2rem;
     font-weight: 900;
+    padding: 10px;
+}
+
+.del-btn {
     color: red;
     background-color: white;
     border: 2px solid red;
-    padding: 10px;
 }
 
 .del-btn:hover {
@@ -176,18 +182,9 @@ select {
 }
 
 .status-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    justify-self: center;
-    height: 3rem;
-    width: 8rem;
-    font-size: 1.2rem;
-    font-weight: 900;
     color: rgb(119, 0, 255);
     background-color: white;
     border: 2px solid rgb(119, 0, 255);
-    padding: 10px;
 }
 
 .status-btn:hover {
