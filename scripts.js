@@ -50,6 +50,17 @@ function displayBook(book) {
     status.textContent = book.status;
     status.classList.add("book-status");
     newRow.appendChild(status);
+
+    const delBtnCell = document.createElement("td")
+    newRow.appendChild(delBtnCell)
+    const delBtn = document.createElement("button")
+    delBtn.textContent = "Delete Book"
+    delBtn.parentElement = newRow
+    delBtn.classList.add("del-btn")
+    delBtnCell.appendChild(delBtn)
+
+    // Add eventlistener to new button
+    delBtnEventListener(delBtn)
 }
 
 // Display books already in array
@@ -70,13 +81,21 @@ addBookForm.addEventListener("submit", (e) => {
     // Add new book to library and display on table
     addBookToLibrary(title, author, pages, status)
     displayBook(newBook);
-
+    
     dialog.close();
-})
+});
+
+// Create event listener on button
+function delBtnEventListener(btn) {
+    btn.addEventListener("click", (e) => {
+        const btn = e.target;
+        btn.parentElement.parentElement.remove()
+    });
+}
 
 addBookBtn.addEventListener("click", () => {
     dialog.showModal()
-})
+});
 
 closeButton.addEventListener("click", () => {
     dialog.close();
