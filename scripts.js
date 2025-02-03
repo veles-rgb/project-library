@@ -5,7 +5,34 @@ const dialog = document.querySelector("dialog");
 const closeButton = document.querySelector("dialog button");
 const addBookForm = document.querySelector("#form");
 
-// Array of Books
+// New class constructor.
+class Book {
+    constructor(title, author, pages, status) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.status = status;
+    };
+
+    // Change the read status of a book.
+    changeStatus(index) {
+        if (myLibrary[index].status === true) {
+            myLibrary[index].status = false
+        } else {
+            myLibrary[index].status = true
+        }
+        // Update table display after status change.
+        updateTable();
+    };
+
+    // Delete book method
+    deleteBook(index) {
+        myLibrary.splice(index, 1);
+        updateTable();
+    };
+};
+
+// Array of Books.
 const myLibrary = [
     new Book("How To Save The World", "veles-rgb", 0, true),
     new Book("The Hobbit", "J. R. R. Tolkien", 310, false),
@@ -13,35 +40,16 @@ const myLibrary = [
     new Book("The Da Vinci Code", "Dan Brown", 689, false),
 ];
 
-// Constructor
-function Book(title, author, pages, status) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.status = status;
-};
-
-// Change the read status of a book
-Book.prototype.changeStatus = function(index) {
-    if (myLibrary[index].status === true) {
-        myLibrary[index].status = false
-    } else {
-        myLibrary[index].status = true
-    }
-    // Update table display after status change
-    updateTable();
-}
-
-// Add books to library
+// Add books to library.
 function addBookToLibrary(title, author, pages, status) {
-    // take params, create a book then store it in the array
-    myLibrary.push(new Book(title, author, pages, status))
+    // take params, create a book then store it in the array.
+    myLibrary.push(new Book(title, author, pages, status));
 };
 
-// Add book to display table
+// Add book to display table.
 function displayBook(book, index) {
     const newRow = document.createElement("tr");
-    // Connect row with index
+    // Connect row with index.
     newRow.setAttribute("data-index", index);
     bookTableBody.appendChild(newRow);
 
@@ -65,7 +73,7 @@ function displayBook(book, index) {
     const statusBtn = document.createElement("button");
     statusBtn.textContent = book.status ? "Read" : "Not Read";
     statusBtn.classList.add("status-btn");
-    // Event listener for status button
+    // Event listener for status button.
     statusBtn.addEventListener("click", () => book.changeStatus(index));
     status.appendChild(statusBtn);
 
@@ -74,25 +82,17 @@ function displayBook(book, index) {
     const delBtn = document.createElement("button");
     delBtn.textContent = "Delete Book";
     delBtn.classList.add("del-btn");
-    delBtn.addEventListener("click", () => deleteBook(index));
+    delBtn.addEventListener("click", () => book.deleteBook(index));
     delBtnCell.appendChild(delBtn);
-}
+};
 
-// Delete book from array and update display
-function deleteBook(index) {
-    myLibrary.splice(index, 1);
-    updateTable();
-}
-
-// Display books already in array
+// Display books already in array.
 function updateTable() {
     bookTableBody.innerHTML = "";
     myLibrary.forEach((book, index) => displayBook(book, index));
-}
+};
 
-updateTable();
-
-// Capture form data and add to library and display
+// Capture form data and add to library and display.
 addBookForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -101,10 +101,10 @@ addBookForm.addEventListener("submit", (e) => {
     const pages = formData.get("pages");
     const status = formData.get("status") === "true";
 
-    // Create new book from form data
+    // Create new book from form data.
     const newBook = new Book(title, author, pages, status);
 
-    // Add new book to library and update display
+    // Add new book to library and update display.
     addBookToLibrary(title, author, pages, status);
     updateTable();
 
@@ -112,9 +112,11 @@ addBookForm.addEventListener("submit", (e) => {
 });
 
 addBookBtn.addEventListener("click", () => {
-    dialog.showModal()
+    dialog.showModal();
 });
 
 closeButton.addEventListener("click", () => {
     dialog.close();
 });
+
+updateTable();
